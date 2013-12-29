@@ -628,7 +628,7 @@ namespace MySql.Web.Security
 					object userProfileEx = Activator.CreateInstance(userProfileExType);
 					var userNamePi = userProfileEx.GetType().GetProperty("UserName");
 
-					userNamePi.SetValue(userProfileEx, userName);
+					userNamePi.SetValue(userProfileEx, userName, null);
 
 					foreach (var key in values.Keys)
 					{
@@ -641,7 +641,7 @@ namespace MySql.Web.Security
 							if (value == null)
 								value = DBNull.Value;
 
-							pi.SetValue(userProfileEx, value);
+							pi.SetValue(userProfileEx, value, null);
 						}
 					}
 

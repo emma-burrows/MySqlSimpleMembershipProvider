@@ -120,12 +120,12 @@ namespace MySql.Data.MySqlClient
 			}
 
 			// Manually create the metadata table         
-			using (var connection = ((MySqlConnection)context.Database.Connection).Clone())
-			{
-				using (var command = connection.CreateCommand())
-				{
-					command.CommandText =
-		@"
+      using (var connection = (MySqlConnection)context.Database.Connection)
+      {
+        using (var command = connection.CreateCommand())
+        {
+          command.CommandText =
+    @"
 CREATE TABLE __MigrationHistory (
 	MigrationId mediumtext,
 	CreatedOn datetime,
@@ -146,14 +146,14 @@ VALUES (
 	@Model,
 	@ProductVersion);
 ";
-					command.Parameters.AddWithValue("@Model", GetModel(context));
-					command.Parameters.AddWithValue("@ProductVersion", GetProductVersion());
-					command.Parameters.AddWithValue("@CreatedOn", DateTime.Now);
-					connection.Open();
-					command.ExecuteNonQuery();
-					connection.Close();
-				}
-			}
+          command.Parameters.AddWithValue("@Model", GetModel(context));
+          command.Parameters.AddWithValue("@ProductVersion", GetProductVersion());
+          command.Parameters.AddWithValue("@CreatedOn", DateTime.Now);
+          connection.Open();
+          command.ExecuteNonQuery();
+          connection.Close();
+        }
+      }
 
 			Seed(context);
 

@@ -108,5 +108,7 @@ Backup*/
 UpgradeLog*.XML
 
 # Keep confidential data out of GitHub
-Web.config 
+Web.config
+Web.Debug.config
+Web.Release.config
 App.config
